@@ -1,0 +1,16 @@
+Hver gang du trykker på pluss så skjer følgende:
+--> activeOperator = true
+??Er first tom??
+--> Hvis den er tom, sett inputField til first 
+----> Hvis den ikke er tom, sett inputField til second
+------> Hvis begge to er fulle så setter vi first = second, second = inputField.valuen
+
+Hver gang du trykker på tall:
+Er operator Active?
+--> Hvis NEI
+----> inputFielden += tallet.
+--> Hvis JA.
+----> inputFielden = tallet og operatorActive = false
+
+= tegn trykking:
+--> Resulterer i en evaluering av tilstedeværende data
