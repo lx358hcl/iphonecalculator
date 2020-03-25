@@ -12,6 +12,14 @@
 
 html, button, body{
     user-select:none;
+    zoom:1.3;
+}
+
+html{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to bottom right, #181818,  #535353);
 }
 
 table{
@@ -95,12 +103,22 @@ tr{
 }
 
 #ipod{
-    position:absolute;
-    top:9px;
-    left:12px;
-    word-spacing:98px;
+    position:relative;
+    top:13px;
+    left:4px;
+    word-spacing:91px;
     font-size:8px;
     color:white;
+}
+
+#battery{
+    position:relative;
+    font-size:10px;
+    top:2px;
+    left:4px;
+    transform: rotate(90deg);
+    filter: grayscale(100%);
+    display:inline-block;
 }
 
 #time{

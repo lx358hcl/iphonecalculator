@@ -17,15 +17,24 @@ numbers.forEach(e => e.addEventListener("click", inputting, false));
 function inputting(e){
   //Some styling
   operators.forEach(allel => allel.textContent == e.target.textContent ? false : allel.style.borderWidth = "0px");
+
   if(e.target.classList[1] == "operacolors" && e.target.textContent != "="){
       $(e.target).animate({
         "border-width":2,
       }, 100);
     }
 
+  if(inputField.value == "Error"){
+    if(e.target.textContent == "AC" || e.target.textContent == "C"){
+
+    }
+    else false;
+  }
+
   //The Calculator
   switch(e.target.classList[0]){
     case "numbers":
+    if(inputField.value.length >= 8 && cObj.activeOperator == false) return false;
     AC.textContent = "C";
         //If the number 0 is clicked, then we do some checks. Most of it below is self-explanatory
         //This section for activeOperator == false, that means that we haven't clicked on one of the operators yet.
@@ -46,7 +55,7 @@ function inputting(e){
             } else inputField.value += e.target.textContent;
           }
         }
-        else if(cObj.activeOperator == true) {
+        else if(cObj.activeOperator == true){
           inputField.value = e.target.textContent;
           cObj.activeOperator = false;
         }
@@ -78,14 +87,16 @@ function inputting(e){
           if(cObj.activeOperator == true){
             inputField.value = "0.";
             cObj.activeOperator = false;
-          } else return false;
+          } 
+          else return false;
         }
         else{
           if(inputField.value == "") inputField.value = "0" + ".";
           else if(cObj.activeOperator == true){
              inputField.value = "0.";
              cObj.activeOperator = false;
-          } else inputField.value += "."; 
+          } 
+          else inputField.value += "."; 
         }
       }
       else if(e.target.textContent == "+/−"){
@@ -101,9 +112,7 @@ function inputting(e){
       else{
         if(!!cObj.first == false) cObj.first = inputField.value;
         else if(!!cObj.first == true && !!cObj.second == false){
-          if(cObj.activeOperator == true){
-            cObj.evaluate();
-          }
+          if(cObj.activeOperator == true) cObj.evaluate();
           else{
             cObj.second = inputField.value;
             cObj.evaluate();
@@ -115,9 +124,10 @@ function inputting(e){
           if(cObj.iteratorMode == true){
               cObj.first = inputField.value;
               cObj.second = "";
-            } else {
-              alert("This part should never be reached, if you have, then fml. I think this means that variable 1 == false, and variable 2 == true, like in the case of console.log(!!.0); false console.log(!!\"0\"); true");
-            }
+            } 
+          else{
+            alert("This part should never be reached, if you have, then fml. I think this means that variable 1 == false, and variable 2 == true, like in the case of console.log(!!.0); false console.log(!!\"0\"); true");
+          }
         }
         cObj.activeOperator = true;
         cObj.iteratorMode = false;
@@ -125,7 +135,7 @@ function inputting(e){
       }
     break;
     default:
-    console.log("okay, this shouldn't actually happen, however if this has happened then it is caused by one or all of these reasons: 1. lodash wasn't loaded, 2. jquery wasn't loaded, or 3. you've used some strange calculator-calculation combo which I wasn't able to find or code for during the debugging.");
+      alert("okay, this shouldn't actually happen, however if this has happened then it is caused by one or all of these reasons: 1. lodash wasn't loaded, 2. jquery wasn't loaded, or 3. you've used some strange calculator-calculation combo which I wasn't able to find or code for during the debugging.");
     break;
   }
   console.log(cObj);
@@ -140,11 +150,12 @@ var cObj = {
   iteratorMode: false,
   evaluate(){
     if(this.first == "" && this.second == "") return false;
-    else if(this.operator == "+") this.first = _.round(+this.first + +this.second, 6)+"";
-    else if(this.operator == "−") this.first = _.round(+this.first - +this.second, 6)+"";
-    else if(this.operator == "×") this.second == "" ? false : this.first = _.round(+this.first * +this.second, 6)+"";
-    else if(this.operator == "÷") this.second == "" ? false : this.first = _.round(+this.first / +this.second, 6)+"";
-    inputField.value = ""+this.first;
+    else if(this.operator == null) return false;
+    else if(this.operator == "+") this.first = _.round(+this.first + +this.second, 6) + "";
+    else if(this.operator == "−") this.first = _.round(+this.first - +this.second, 6) + "";
+    else if(this.operator == "×") this.second == "" ? false : this.first = _.round(+this.first * +this.second, 6) + "";
+    else if(this.operator == "÷") this.second == "" ? false : this.first = _.round(+this.first / +this.second, 6) + "";
+    inputField.value = inputField.value == "Error" ? "Error" : "" + this.first.length > 8 ? "Error" : "" + this.first;
   },
 }
 
@@ -156,12 +167,12 @@ var updateTime = (function(){
     var time = new Date();
     var timeStamp = [...`${time.getHours()}:${time.getMinutes()}`];
     var colonIndex = timeStamp.indexOf(":");
-    if(colonIndex == 2 && timeStamp.length == 4) timeStamp.splice(3,0,"0");
-    else if (colonIndex = 1 && timeStamp.length == 4) timeStamp.splice(0,0,"0");
+    if(colonIndex == 2 && timeStamp.length == 4) timeStamp.splice(3, 0, "0");
+    else if (colonIndex = 1 && timeStamp.length == 4) timeStamp.splice(0, 0, "0");
     else if (colonIndex = 1 && timeStamp.length == 3){
-      timeStamp.splice(0,0,"0"); 
-      timeStamp.splice(3,0,"0");
+      timeStamp.splice(0, 0, "0"); 
+      timeStamp.splice(3, 0, "0");
     }
     clock.textContent = timeStamp.join("");
   }, 80);
-})()
+})();
