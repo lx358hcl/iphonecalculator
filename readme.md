@@ -1,3 +1,3 @@
 # iPhone Calculator Recreation
 
-## Demo: https://lukamo.github.io/iPhoneCalculatorRecreation/
+## Demo: https://lukamo1996.github.io/iPhoneCalculatorRecreation/
