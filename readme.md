@@ -4,4 +4,4 @@
 
 ---
 
-## Demo: https://lukamo1996.github.io/iPhoneCalculatorRecreation/
+## Demo: https://lukamomc.github.io/iPhoneCalculatorRecreation/
